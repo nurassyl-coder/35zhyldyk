@@ -6,13 +6,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!--metatextblock-->
     <title>35 жылдық</title>
-    <meta property="og:url" content="https://nurassyl-coder.github.io/35zhyldyk/" />
+    <meta property="og:url" content="https://nurassyl-coder.github.io/35zhyldyk" />
     <meta property="og:title" content="35 жылдық" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:image"
         content="https://static.tildacdn.pro/tild6331-6331-4565-b162-306634383064/WhatsApp_Image_2025-.jpeg" />
-    <link rel="canonical" href="https://nurassyl-coder.github.io/35zhyldyk/"> <!--/metatextblock-->
+    <link rel="canonical" href="https://nurassyl-coder.github.io/35zhyldyk"> <!--/metatextblock-->
     <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <link rel="dns-prefetch" href="https://ws.tildacdn.com">
@@ -511,6 +511,204 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <style>
+                                .custom-timer {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    gap: 2%;
+                                    font-family: 'Montserrat', sans-serif;
+                                    width: 100%;
+                                    height: 100%;
+                                    box-sizing: border-box;
+                                    /* Предотвращаем перенос элементов, чтобы верстка не развалилась */
+                                    flex-wrap: nowrap;
+                                }
+
+                                .custom-timer .timer-segment {
+                                    position: relative;
+                                    width: 22%;
+                                    max-width: 120px;
+                                    aspect-ratio: 1;
+                                    /* ВАЖНО ДЛЯ iOS: запрещаем Safari сплющивать круги */
+                                    flex-shrink: 0;
+                                }
+
+                                .custom-timer svg {
+                                    position: absolute;
+                                    /* Позиционируем абсолютно, чтобы SVG не влиял на высоту блока */
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    transform: rotate(-90deg);
+                                    display: block;
+                                    /* Убирает фантомные отступы у SVG */
+                                }
+
+                                .custom-timer circle {
+                                    fill: none;
+                                }
+
+                                .custom-timer .track {
+                                    stroke: rgba(143, 175, 137, 0.2);
+                                }
+
+                                .custom-timer .progress {
+                                    stroke: #8faf89;
+                                    stroke-linecap: round;
+                                    stroke-dasharray: 295.3;
+                                    stroke-dashoffset: 295.3;
+                                    transition: stroke-dashoffset 0.5s linear;
+                                }
+
+                                .custom-timer .timer-text {
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%);
+                                    text-align: center;
+                                    color: #8faf89;
+                                    /* ВАЖНО ДЛЯ iOS: жестко ограничиваем ширину текста внутри круга */
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .custom-timer .timer-num {
+                                    font-size: 36px;
+                                    font-weight: 300;
+                                    line-height: 1;
+                                }
+
+                                .custom-timer .timer-label {
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    margin-top: 5px;
+                                    line-height: 1;
+                                    /* Чтобы на iOS не было огромных межстрочных интервалов */
+                                }
+
+                                .custom-timer .timer-sep {
+                                    font-size: 30px;
+                                    color: #8faf89;
+                                    font-weight: 300;
+                                    transform: translateY(-8px);
+                                    /* ВАЖНО ДЛЯ iOS: запрещаем сжимать двоеточия */
+                                    flex-shrink: 0;
+                                }
+
+                                @media (max-width: 479px) {
+                                    .custom-timer .timer-num {
+                                        /* Чуть-чуть уменьшил для безопасности на iPhone SE и старых моделях */
+                                        font-size: 22px;
+                                    }
+
+                                    .custom-timer .timer-label {
+                                        font-size: 9px;
+                                        margin-top: 2px;
+                                    }
+
+                                    .custom-timer .timer-sep {
+                                        font-size: 18px;
+                                    }
+                                }
+                            </style>
+
+                            <script>
+                                (function () {
+                                    function updateTimer() {
+                                        var targetDate = new Date("2026-05-30T18:00:00+05:00");
+                                        var now = new Date();
+                                        var diff = targetDate - now;
+
+                                        if (diff <= 0) diff = 0;
+
+                                        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                        var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                                        var minutes = Math.floor((diff / 1000 / 60) % 60);
+                                        var seconds = Math.floor((diff / 1000) % 60);
+
+                                        var valDays = document.getElementById('val-days');
+                                        if (valDays) valDays.textContent = days;
+                                        var valHours = document.getElementById('val-hours');
+                                        if (valHours) valHours.textContent = hours;
+                                        var valMins = document.getElementById('val-minutes');
+                                        if (valMins) valMins.textContent = minutes;
+                                        var valSecs = document.getElementById('val-seconds');
+                                        if (valSecs) valSecs.textContent = seconds;
+
+                                        var circ = 295.3;
+                                        var circDays = document.getElementById('circ-days');
+                                        if (circDays) circDays.style.strokeDashoffset = circ - (circ * Math.min(days / 365, 1));
+
+                                        var circHours = document.getElementById('circ-hours');
+                                        if (circHours) circHours.style.strokeDashoffset = circ - (circ * (hours / 24));
+
+                                        var circMins = document.getElementById('circ-minutes');
+                                        if (circMins) circMins.style.strokeDashoffset = circ - (circ * (minutes / 60));
+
+                                        var circSecs = document.getElementById('circ-seconds');
+                                        if (circSecs) circSecs.style.strokeDashoffset = circ - (circ * (seconds / 60));
+                                    }
+                                    updateTimer();
+                                    setInterval(updateTimer, 1000);
+                                })();
+                            </script>
+                        </div>
+                        <!-- <div class='tn-atom tn-atom__html'>
+                            <div class="custom-timer" id="my-custom-timer">
+                                <div class="timer-segment">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="track" cx="50" cy="50" r="47" stroke-width="4"></circle>
+                                        <circle class="progress" id="circ-days" cx="50" cy="50" r="47" stroke-width="4">
+                                        </circle>
+                                    </svg>
+                                    <div class="timer-text">
+                                        <div class="timer-num" id="val-days">0</div>
+                                        <div class="timer-label">дней</div>
+                                    </div>
+                                </div>
+                                <div class="timer-sep">:</div>
+                                <div class="timer-segment">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="track" cx="50" cy="50" r="47" stroke-width="4"></circle>
+                                        <circle class="progress" id="circ-hours" cx="50" cy="50" r="47"
+                                            stroke-width="4"></circle>
+                                    </svg>
+                                    <div class="timer-text">
+                                        <div class="timer-num" id="val-hours">0</div>
+                                        <div class="timer-label">часов</div>
+                                    </div>
+                                </div>
+                                <div class="timer-sep">:</div>
+                                <div class="timer-segment">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="track" cx="50" cy="50" r="47" stroke-width="4"></circle>
+                                        <circle class="progress" id="circ-minutes" cx="50" cy="50" r="47"
+                                            stroke-width="4"></circle>
+                                    </svg>
+                                    <div class="timer-text">
+                                        <div class="timer-num" id="val-minutes">0</div>
+                                        <div class="timer-label">минут</div>
+                                    </div>
+                                </div>
+                                <div class="timer-sep">:</div>
+                                <div class="timer-segment">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="track" cx="50" cy="50" r="47" stroke-width="4"></circle>
+                                        <circle class="progress" id="circ-seconds" cx="50" cy="50" r="47"
+                                            stroke-width="4"></circle>
+                                    </svg>
+                                    <div class="timer-text">
+                                        <div class="timer-num" id="val-seconds">0</div>
+                                        <div class="timer-label">секунд</div>
+                                    </div>
+                                </div>
+                            </div>
                             <style>
                                 .custom-timer {
                                     display: flex;
@@ -635,7 +833,7 @@
                                     setInterval(updateTimer, 1000);
                                 })();
                             </script>
-                        </div>
+                        </div> -->
                     </div>
                     <div class='t396__elem tn-elem tn-elem__10379681911746968814217' data-elem-id='1746968814217'
                         data-elem-type='image' data-field-top-value="223" data-field-left-value="338"
@@ -1570,6 +1768,7 @@
                         left: calc(50% - 160px + 70px);
                         width: 180px;
                         height: auto;
+                        margin-top: -20px;
                     }
 
                     #rec1037968211 .tn-elem[data-elem-id="1721062325751"] {
@@ -1629,6 +1828,7 @@
                         left: calc(50% - 160px + 27px);
                         width: 267px;
                         height: auto;
+                        margin-top: 20px;
                     }
                 }
 
@@ -3911,8 +4111,8 @@
                         data-field-top-res-320-value="600" data-field-left-res-320-value="27"
                         data-field-height-res-320-value="267" data-field-width-res-320-value="267">
                         <div class='tn-atom'> <img class='tn-atom__img t-img'
-                                data-original='Gemini_Generated_Image_iit0y0iit0y0iit0-removebg-preview.png'
-                                src='Gemini_Generated_Image_iit0y0iit0y0iit0-removebg-preview.png' alt=''
+                                data-original='Gemini_Generated_Image_zfmjvtzfmjvtzfmj-removebg-preview.png'
+                                src='Gemini_Generated_Image_zfmjvtzfmjvtzfmj-removebg-preview.png' alt=''
                                 imgfield='tn_img_1721062524177' /> </div>
                     </div>
                     <div class='t396__elem tn-elem tn-elem__10379682111721062591512' data-elem-id='1721062591512'
